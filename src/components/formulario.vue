@@ -37,7 +37,7 @@
         </form>
         </div>
             <div class="col-12 col-md-8">
-                <total-proyectos :numeroProyectos="numeroProyectos" :proyectos="proyectos" :CambiarEstado="CambiarEstado" :limpiarData="limpiarData" />
+                <total-proyectos :numeroProyectos="numeroProyectos" :proyectos="proyectos" :CambiarEstado="CambiarEstado" :limpiarData="limpiarData" :borrar="borrar" />
             </div>
     </div>
     <hr>
@@ -82,11 +82,20 @@ import TotalProyectos from './TotalProyectos.vue';
             saveData(){
                 localStorage.setItem("proyectos", JSON.stringify(this.proyectos));
             },
+            Save(){
+                localStorage.setItem("proyecto", JSON.stringify(this.proyecto, this.tipo, this.urgente ));
+            },
         limpiarData(){
             this.proyectos = [];
             localStorage.clear();
         },
-    
+             borrar: function(index) {
+                // Borramos de la lista
+             this.proyectos.splice(index, 1);
+             this.saveData();
+                                
+            },
+
         },
         computed: {
             numeroProyectos(){
